@@ -19,14 +19,14 @@ Le **score** permet de voir notre progression. Plus il est élevée, plus les va
 
 ## Planification
 
-| User Story                | Semaine | Remarques |
-| ------------------------- | ------- | ------- |
-| Fonctionalité de tir      |        |     |
-| Déplacement et controle   |        |     |
-| Gains de coins            |        |     |
-| Affichage de score        |        |     |
-| Affichage de la vie       |        |     |
-| Ennemis                   |        |     |
+| User Story                | Semaine (commencement) | Semaine (finalisation) | Remarques |
+| ------------------------- | ---------------------- | ---------------------- | --------- |
+| Fonctionalité de tir      |                        |           -            |           |
+| Déplacement et controle   |           3            |           -            |           |
+| Gains de coins            |                        |           -            |           |
+| Affichage de score        |                        |           -            |           |
+| Affichage de la vie       |                        |           -            |           |
+| Ennemis                   |                        |           -            |           |
 
 ---
 
