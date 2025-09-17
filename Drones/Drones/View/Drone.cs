@@ -11,13 +11,18 @@ namespace Drones
         private Pen droneBrush = new Pen(new SolidBrush(Color.Purple), 3);
         public const int ANTIVIRUS_WIDTH = 150;
         public const int ANTIVIRUS_HEIGHT = 90;
+
+        public int ENNEMIS_AREA_WIDTH = AirSpace.WIDTH - 300;
+        public int ENNEMIS_AREA_HEIGHT = AirSpace.HEIGHT - ANTIVIRUS_HEIGHT - 30;
+
         public bool showCheck = true;
 
         // De manière graphique
         public void Render(BufferedGraphics drawingSpace)
         {
             drawingSpace.Graphics.DrawImage(Resources.drone, X, Y, ANTIVIRUS_WIDTH, ANTIVIRUS_HEIGHT) ;
-            drawingSpace.Graphics.DrawLine(new Pen(new SolidBrush(Color.Black), 3), X, Y, ANTIVIRUS_WIDTH, ANTIVIRUS_HEIGHT) ;
+            drawingSpace.Graphics.DrawLine(new Pen(new SolidBrush(Color.Black), 3),0, ENNEMIS_AREA_HEIGHT , AirSpace.WIDTH - ANTIVIRUS_WIDTH*2, ENNEMIS_AREA_HEIGHT);
+            drawingSpace.Graphics.DrawLine(new Pen(new SolidBrush(Color.Black), 3), ENNEMIS_AREA_WIDTH, 0, ENNEMIS_AREA_WIDTH, AirSpace.HEIGHT);
 
             if (showCheck == true)
             {

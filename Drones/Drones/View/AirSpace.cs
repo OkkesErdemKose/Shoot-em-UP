@@ -39,7 +39,7 @@ namespace Drones
                 {
                     case Keys.Left: drone.MoveLeft(); break;
                     case Keys.Right: drone.MoveRight(); break;
-                    case Keys.Escape: break;
+                    case Keys.Escape:  break;
                 }
 
             }
@@ -72,6 +72,7 @@ namespace Drones
         // Méthode appelée à chaque frame
         private void NewFrame(object sender, EventArgs e)
         {
+            ticker.Interval = 1;
             this.Update(ticker.Interval);
             this.Render();
         }

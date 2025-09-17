@@ -8,6 +8,8 @@
         private string _name;                           // Un nom
         private int _x;                                 // Position en X depuis la gauche de l'espace aérien
         private int _y;                                 // Position en Y depuis le haut de l'espace aérien
+        private int _vx;
+        private int _vy;
 
         // Constructeur
         public Drone(int x, int y, string name)
@@ -19,9 +21,11 @@
         }
         public int X { get { return _x;} }
         public int Y { get { return _y;} }
+        public int Vx { get { return _vx; } }
+        public int Vy { get { return _vy; } }
         public string Name { get { return _name;} }
 
-        public int deplacement = 5;
+        public int deplacement = 1;
 
         public void MoveLeft() => _x -= deplacement;
         public void MoveRight() => _x += deplacement;
@@ -30,18 +34,16 @@
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
-            //_x += 2;                                    // Il s'est déplacé de 2 pixels vers la droite
-            //_y += GlobalHelpers.alea.Next(-2, 3);       // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
-            //_charge--;             
+            _x += Vx;
+            _y += Vy;
 
-
-            if (_x < -15)
-            {
-                _x = 1275;
-            }
-            else if (_x > 1290)
+            if (_x < 0)
             {
                 _x = 0;
+            }
+            else if (_x > AirSpace.WIDTH - ANTIVIRUS_WIDTH * 3)
+            {
+                _x = AirSpace.WIDTH - ANTIVIRUS_WIDTH * 3;
 
             }
 
