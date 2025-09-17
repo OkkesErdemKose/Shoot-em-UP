@@ -23,8 +23,27 @@ namespace Drones
             currentContext = BufferedGraphicsManager.Current;
             // Creates a BufferedGraphics instance associated with this form, and with
             // dimensions the same size as the drawing surface of the form.
+
+            this.KeyPreview = true; // Ensures the form captures key events before child controls
+            this.KeyDown += Form1_KeyDown;
+
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
             this.fleet = fleet;
+        }
+
+        public void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            foreach (Drone drone in fleet)
+            {
+                switch (e.KeyCode)
+                {
+                    case Keys.Left: drone.MoveLeft(); break;
+                    case Keys.Right: drone.MoveRight(); break;
+                    case Keys.Escape: break;
+                }
+
+            }
+
         }
 
         // Affichage de la situation actuelle

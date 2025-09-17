@@ -17,6 +17,7 @@ namespace Drones
         public void Render(BufferedGraphics drawingSpace)
         {
             drawingSpace.Graphics.DrawImage(Resources.drone, X, Y, ANTIVIRUS_WIDTH, ANTIVIRUS_HEIGHT) ;
+            drawingSpace.Graphics.DrawLine(new Pen(new SolidBrush(Color.Black), 3), X, Y, ANTIVIRUS_WIDTH, ANTIVIRUS_HEIGHT) ;
 
             if (showCheck == true)
             {
@@ -34,13 +35,13 @@ namespace Drones
             }
 
 
-            drawingSpace.Graphics.DrawString($"{this}", TextHelpers.drawFont, TextHelpers.writingBrush, X, Y - 25);
+            drawingSpace.Graphics.DrawString($"{this}", TextHelpers.drawFont, TextHelpers.writingBrush, X, Y - 35);
         }
 
         // De manière textuelle
         public override string ToString()
         {
-            return $"Entité : {Name}";
+            return $"{Name} \nY : {_y} ; X : {_x}";
         }
 
     }

@@ -21,13 +21,29 @@
         public int Y { get { return _y;} }
         public string Name { get { return _name;} }
 
+        public int deplacement = 5;
+
+        public void MoveLeft() => _x -= deplacement;
+        public void MoveRight() => _x += deplacement;
+
         // Cette méthode calcule le nouvel état dans lequel le drone se trouve après
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
-            _x += 2;                                    // Il s'est déplacé de 2 pixels vers la droite
-            _y += GlobalHelpers.alea.Next(-2, 3);       // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
-            //_charge--;                                  // Il a dépensé de l'énergie
+            //_x += 2;                                    // Il s'est déplacé de 2 pixels vers la droite
+            //_y += GlobalHelpers.alea.Next(-2, 3);       // Il s'est déplacé d'une valeur aléatoire vers le haut ou le bas
+            //_charge--;             
+
+
+            if (_x < -15)
+            {
+                _x = 1275;
+            }
+            else if (_x > 1290)
+            {
+                _x = 0;
+
+            }
 
         }
 
