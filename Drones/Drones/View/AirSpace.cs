@@ -1,3 +1,5 @@
+
+
 namespace Drones
 {
     // La classe AirSpace représente le territoire au dessus duquel les drones peuvent voler
@@ -8,6 +10,10 @@ namespace Drones
     {
         public static readonly int WIDTH = 1400;        // Dimensions of the airspace
         public static readonly int HEIGHT = 700;
+
+
+        public static int ENNEMIS_AREA_WIDTH = AirSpace.WIDTH - 300;
+        public static int ENNEMIS_AREA_HEIGHT = AirSpace.HEIGHT - Drone.ANTIVIRUS_HEIGHT - 30;
 
         // La flotte est l'ensemble des drones qui évoluent dans notre espace aérien
         private List<Drone> fleet;

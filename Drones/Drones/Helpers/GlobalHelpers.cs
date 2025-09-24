@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace Drones
 {
-    internal static class GlobalHelpers
+    internal static class RandomHelpers
     {
-        public static Random alea = new Random();
+        public static int Rnd(int a, int b)
+        {
+            int result;
+
+            Random rnd = new Random();
+            result = rnd.Next(a, b);
+
+            return result;
+        }
     }
 }

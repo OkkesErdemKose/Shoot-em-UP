@@ -17,11 +17,18 @@ namespace Drones
 
             // Création de la flotte de drones
             List<Drone> fleet = new List<Drone>();
-            fleet.Add(new Drone(0, AirSpace.HEIGHT - 100, "Antivirus"));
+            fleet.Add(new Drone(0, AirSpace.HEIGHT - (AirSpace.HEIGHT - AirSpace.ENNEMIS_AREA_HEIGHT - 20), "Antivirus"));
 
 
             List<Virus> virus = new List<Virus>();
-            virus.Add(new Virus(0, 0, "Virus.exe"));
+
+            for (int i = 0; i < AirSpace.ENNEMIS_AREA_HEIGHT / Virus.VIRUS_HEIGHT + 1; i++)
+            {
+                virus.Add(new Virus(27 + (Virus.VIRUS_WIDTH + 100)  * i, 0, $"Virus.exe n°{i+1}"));
+
+            }
+
+
 
 
 

@@ -22,7 +22,7 @@
         public int Y { get { return _posY; } }
         public string Name { get { return _name;} }
 
-        public int deplacement = 10;
+        public int deplacement = 25;
 
         public void MoveLeft() => _posX -= deplacement;
         public void MoveRight() => _posX += deplacement;

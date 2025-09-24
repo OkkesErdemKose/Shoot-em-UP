@@ -21,7 +21,6 @@
         public int Y { get { return _posY; } }
         public string Name { get { return _name;} }
 
-        public int deplacement = 1;
 
 
         // Cette méthode calcule le nouvel état dans lequel le drone se trouve après
@@ -29,7 +28,11 @@
         public void Update(int interval)
         {
 
-            _posY++;
+
+            if (!(_posY == AirSpace.ENNEMIS_AREA_HEIGHT - VIRUS_HEIGHT))
+            {
+                _posY += 1;
+            }
 
 
         }
