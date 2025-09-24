@@ -15,7 +15,7 @@ namespace Drones
         public int ENNEMIS_AREA_WIDTH = AirSpace.WIDTH - 300;
         public int ENNEMIS_AREA_HEIGHT = AirSpace.HEIGHT - ANTIVIRUS_HEIGHT - 30;
 
-        public bool showCheck = true;
+        public bool showCheck = false;
 
         // De manière graphique
         public void Render(BufferedGraphics drawingSpace)
@@ -46,7 +46,7 @@ namespace Drones
         // De manière textuelle
         public override string ToString()
         {
-            return $"{Name} \nY : {_y} ; X : {_x}";
+            return $"{Name} \nX : {_posX} ; Y : {_posY}";
         }
 
     }

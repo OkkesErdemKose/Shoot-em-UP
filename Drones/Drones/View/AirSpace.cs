@@ -11,12 +11,13 @@ namespace Drones
 
         // La flotte est l'ensemble des drones qui évoluent dans notre espace aérien
         private List<Drone> fleet;
+        private List<Virus> virus;
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
 
         // Initialisation de l'espace aérien avec un certain nombre de drones
-        public AirSpace(List<Drone> fleet)
+        public AirSpace(List<Drone> fleet, List<Virus> virus)
         {
             InitializeComponent();
             // Gets a reference to the current BufferedGraphicsContext
@@ -29,6 +30,7 @@ namespace Drones
 
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
             this.fleet = fleet;
+            this.virus = virus;
         }
 
         public void Form1_KeyDown(object sender, KeyEventArgs e)
@@ -57,6 +59,13 @@ namespace Drones
                 drone.Render(airspace);
             }
 
+            foreach (Virus virus in virus)
+            {
+                virus.Render(airspace);
+            }
+
+
+
             airspace.Render();
         }
 
@@ -66,6 +75,10 @@ namespace Drones
             foreach (Drone drone in fleet)
             {
                 drone.Update(interval);
+            }
+            foreach (Virus virus in virus)
+            {
+                virus.Update(interval);
             }
         }
 
