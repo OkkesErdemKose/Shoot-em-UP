@@ -17,7 +17,7 @@
             _posX = posX;
             _posY = posY;
             _name = name;
-            _vitesse = 10;
+            _vitesse = 15;
             //_charge = GlobalHelpers.alea.Next(FULLCHARGE); // La charge initiale de la batterie est choisie aléatoirement
         }
         public int X { get { return _posX; } }
@@ -43,6 +43,7 @@
             }
 
         }
+
 
     }
 }

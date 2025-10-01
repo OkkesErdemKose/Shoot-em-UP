@@ -42,7 +42,7 @@ namespace Drones
             }
 
 
-            drawingSpace.Graphics.DrawString($"{this}", TextHelpers.drawFont, TextHelpers.writingBrush, X, Y - 35);
+            drawingSpace.Graphics.DrawString($"{this}", TextHelpers.drawFontH4, TextHelpers.writingBrush, X, Y - 35);
         }
 
         // De manière textuelle

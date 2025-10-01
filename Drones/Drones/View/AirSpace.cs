@@ -1,5 +1,6 @@
 ﻿
 
+using Drones.Helpers;
 using System.Runtime.InteropServices;
 
 namespace Drones
@@ -26,12 +27,15 @@ namespace Drones
         // La flotte est l'ensemble des drones qui évoluent dans notre espace aérien
         private List<Drone> fleet;
         private List<Virus> virus;
+        private List<Ammo> ammo;
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
 
+        public static int ENNEMIS_AREA_WEIGHT { get; internal set; }
+
         // Initialisation de l'espace aérien avec un certain nombre de drones
-        public AirSpace(List<Drone> fleet, List<Virus> virus)
+        public AirSpace(List<Drone> fleet, List<Virus> virus, List<Ammo> ammo)
         {
             InitializeComponent();
             // Gets a reference to the current BufferedGraphicsContext
@@ -45,25 +49,9 @@ namespace Drones
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
             this.fleet = fleet;
             this.virus = virus;
+            
         }
 
-        //public void Form1_KeyDown(object sender, KeyEventArgs e)
-        //{
-        //    foreach (Drone drone in fleet)
-        //    {
-        //
-        //
-        //        if ((GetAsyncKeyState((int)Keys.Left) & 0x8000) != 0)
-        //            drone.MoveLeft();
-        //
-        //        if ((GetAsyncKeyState((int)Keys.Right) & 0x8000) != 0)
-        //            drone.MoveRight();
-        //
-        //        if ((GetAsyncKeyState((int)Keys.Escape) & 0x8000) != 0)
-        //            Close();
-        //
-        //    }
-        //}
 
         private void DeplacementKeyState()
         {
@@ -75,9 +63,13 @@ namespace Drones
                 if ((GetAsyncKeyState((int)Keys.Right) & 0x8000) != 0)
                     drone.MoveRight();
 
+               if ((GetAsyncKeyState((int)Keys.Enter) & 0x101) != 0)
+                {
+                    continue;
+                }
 
                 if ((GetAsyncKeyState((int)Keys.Escape) & 0x8000) != 0)
-                    Close();
+                    continue;
             }
         }
 
@@ -87,7 +79,23 @@ namespace Drones
         // Affichage de la situation actuelle
         private void Render()
         {
+            Pen brushBlack = new Pen(new SolidBrush(Color.Black), 3);
             airspace.Graphics.Clear(Color.GhostWhite);
+
+            airspace.Graphics.DrawString($"Bonus", TextHelpers.drawFontH1, TextHelpers.writingBrush, (AirSpace.ENNEMIS_AREA_WIDTH + AirSpace.WIDTH) / 2 - 50, 30);
+
+            airspace.Graphics.DrawRectangle(brushBlack, (AirSpace.ENNEMIS_AREA_WIDTH + AirSpace.WIDTH) / 2 - 100, 100, 200, 60);
+
+            airspace.Graphics.DrawRectangle(brushBlack, (AirSpace.ENNEMIS_AREA_WIDTH + AirSpace.WIDTH) / 2 - 100, 210, 200, 60);
+
+            airspace.Graphics.DrawRectangle(brushBlack, (AirSpace.ENNEMIS_AREA_WIDTH + AirSpace.WIDTH) / 2 - 100, 320, 200, 60);
+
+
+
+            airspace.Graphics.DrawString($"Score", TextHelpers.drawFontH2, TextHelpers.writingBrush, AirSpace.ENNEMIS_AREA_WIDTH + 20, 30);
+
+
+            //airspace.Graphics.DrawString($"Nombre de virus : {Program.virus.Count}", TextHelpers.drawFont2, TextHelpers.writingBrush, AirSpace.ENNEMIS_AREA_WIDTH + 30, 30);
 
             // draw drones
             foreach (Drone drone in fleet)
@@ -101,13 +109,16 @@ namespace Drones
                 {
                     virus.Render(airspace);
 
+
                 }
 
             }
 
+            foreach (Ammo ammo in ammo)
+            {
+                ammo.Render(airspace);
+            }
 
-
-            airspace.Render();
         }
 
         // Calcul du nouvel état après que 'interval' millisecondes se sont écoulées

@@ -1,10 +1,14 @@
 ﻿using Drones.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Xml.Linq;
 
-namespace Drones
+namespace Drones.View
 {
-    // Cette partie de la classe Drone définit comment on peut voir un drone
-
-    public partial class Virus
+    public partial class Ammo
     {
 
         private Pen virusBrush = new Pen(new SolidBrush(Color.Purple), 3);
@@ -36,6 +40,5 @@ namespace Drones
             return $"{Name} ";
             //return $"{Name} \nY : {_posY} ; X : {_posX}";
         }
-
     }
 }

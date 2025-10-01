@@ -25,7 +25,7 @@ Le **score** permet de voir notre progression. Plus il est élevée, plus les va
 | Déplacement et controle   |           3            |           5            |           |
 | Gains de coins            |                        |           -            |           |
 | Affichage de score        |                        |           -            |           |
-| Affichage de la vie       |                        |           -            |           |
+| Affichage de la vie       |           6            |           -            |           |
 | Ennemis                   |           5            |           -            |           |
 
 ---

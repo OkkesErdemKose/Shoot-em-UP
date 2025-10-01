@@ -4,7 +4,7 @@
     public partial class Virus
     {
 
-        private int _health;                          
+        private int _health = 100;                          
         private string _name;                         
         private int _posX;                               
         private int _posY;
@@ -20,6 +20,7 @@
         }
         public int X { get { return _posX; } }
         public int Y { get { return _posY; } }
+        public int Health { get { return _health; } }
         public string Name { get { return _name;} }
         public bool IsDead { get { return _isDead; } }
 
@@ -28,6 +29,12 @@
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
+
+            if (_health == 0)
+            {
+                _isDead = true;
+
+            }
 
 
             if (!(_posY == AirSpace.ENNEMIS_AREA_HEIGHT - VIRUS_HEIGHT))
