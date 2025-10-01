@@ -8,6 +8,7 @@
         private string _name;                           // Un nom
         private int _posX;                                 // Position en X depuis la gauche de l'espace aérien
         private int _posY;                                 // Position en Y depuis le haut de l'espace aérien
+        private int _vitesse;                                 // Vitesse de déplacement
 
 
         // Constructeur
@@ -16,16 +17,16 @@
             _posX = posX;
             _posY = posY;
             _name = name;
+            _vitesse = 10;
             //_charge = GlobalHelpers.alea.Next(FULLCHARGE); // La charge initiale de la batterie est choisie aléatoirement
         }
         public int X { get { return _posX; } }
         public int Y { get { return _posY; } }
         public string Name { get { return _name;} }
 
-        public int deplacement = 25;
 
-        public void MoveLeft() => _posX -= deplacement;
-        public void MoveRight() => _posX += deplacement;
+        public void MoveLeft() => _posX -= _vitesse;
+        public void MoveRight() => _posX += _vitesse;
 
         // Cette méthode calcule le nouvel état dans lequel le drone se trouve après
         // que 'interval' millisecondes se sont écoulées

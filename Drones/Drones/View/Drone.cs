@@ -14,7 +14,7 @@ namespace Drones
         public const int ANTIVIRUS_HEIGHT = 150;
 
 
-        public bool showCheck = true;
+        public bool showCheck = false;
 
         // De manière graphique
         public void Render(BufferedGraphics drawingSpace)

@@ -8,6 +8,7 @@
         private string _name;                         
         private int _posX;                               
         private int _posY;
+        private bool _isDead = false;
 
         // Constructeur
         public Virus(int posX, int posY, string name)
@@ -20,7 +21,7 @@
         public int X { get { return _posX; } }
         public int Y { get { return _posY; } }
         public string Name { get { return _name;} }
-
+        public bool IsDead { get { return _isDead; } }
 
 
         // Cette méthode calcule le nouvel état dans lequel le drone se trouve après
@@ -33,6 +34,14 @@
             {
                 _posY += 1;
             }
+            else
+            {
+                _posY = AirSpace.ENNEMIS_AREA_HEIGHT - VIRUS_HEIGHT;
+                _isDead = true;
+                Console.WriteLine($"{Name} a touché le bord");
+            }
+
+
 
 
         }

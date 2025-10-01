@@ -21,8 +21,9 @@ namespace Drones
 
 
             List<Virus> virus = new List<Virus>();
+            //AirSpace.ENNEMIS_AREA_HEIGHT / Virus.VIRUS_HEIGHT + 1
 
-            for (int i = 0; i < AirSpace.ENNEMIS_AREA_HEIGHT / Virus.VIRUS_HEIGHT + 1; i++)
+            for (int i = 0; i < RandomHelpers.Rnd(2,4); i++)
             {
                 virus.Add(new Virus(27 + (Virus.VIRUS_WIDTH + 100)  * i, 0, $"Virus.exe n°{i+1}"));
 
