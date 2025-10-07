@@ -16,3 +16,4 @@
 - Il est temps de remplacer le thème "Drone" par le votre dans le code
 - Je n'arrive pas à exécuter votre programme, le code ne compile pas. Une des raisons est les namespace: mettez tout dans le même namespace.
 - Attention aux références à vos images. `Image.FromFile("./Resources/vaisseau.png")` marche certainement sur votre poste parce que vous avez copié des fichiers à la main. Mais ça ne marche pas chez moi
+- Merci de créer le dossier `doc` à la racine de votre repo, comme demandé en début de projet
