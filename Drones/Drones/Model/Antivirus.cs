@@ -1,7 +1,7 @@
-﻿namespace Drones
+﻿namespace AntiV
 {
     // Cette partie de la classe Drone définit ce qu'est un drone par un modèle numérique
-    public partial class Drone
+    public partial class Antivirus
     {
         //public static readonly int FULLCHARGE = 100;   // Charge maximale de la batterie
         private int _charge;                            // La charge actuelle de la batterie
@@ -12,17 +12,27 @@
 
 
         // Constructeur
-        public Drone(int posX, int posY, string name)
+        public Antivirus(int posX, int posY, string name)
         {
             _posX = posX;
             _posY = posY;
             _name = name;
-            _vitesse = 15;
+            _vitesse = 10;
             //_charge = GlobalHelpers.alea.Next(FULLCHARGE); // La charge initiale de la batterie est choisie aléatoirement
         }
-        public int X { get { return _posX; } }
-        public int Y { get { return _posY; } }
-        public string Name { get { return _name;} }
+        public int X
+        {
+            get { return _posX; }
+            set { _posX = value; }
+        }
+        public int Y {
+            get { return _posY; } 
+            set { _posY = value; }
+        }
+        public string Name { 
+            get { return _name;}
+            set { _name = value; }
+        }
 
 
         public void MoveLeft() => _posX -= _vitesse;
@@ -43,7 +53,6 @@
             }
 
         }
-
 
     }
 }

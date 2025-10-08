@@ -1,6 +1,7 @@
-﻿using Drones.Helpers;
+﻿using AntiV.Helpers;
+using AntiV.Properties;
 
-namespace Drones
+namespace AntiV
 {
     // Cette partie de la classe Drone définit comment on peut voir un drone
 
@@ -8,9 +9,7 @@ namespace Drones
     {
 
         private Pen virusBrush = new Pen(new SolidBrush(Color.Purple), 3);
-        private Pen blackPen = new Pen(new SolidBrush(Color.Black), 5);
-        private Brush healthBrush = new SolidBrush(Color.Green);
-        private Image virusImage = Image.FromFile("./Resources/virus.png");
+        private Image virusImage = Resources.virus;
 
         public const int VIRUS_WIDTH = 90;
         public const int VIRUS_HEIGHT = 90;
@@ -20,21 +19,16 @@ namespace Drones
         {
             drawingSpace.Graphics.DrawImage(virusImage, _posX, _posY, VIRUS_WIDTH, VIRUS_HEIGHT);
 
-            //drawingSpace.Graphics.DrawRectangle(virusBrush, _posX, _posY, VIRUS_WIDTH, VIRUS_HEIGHT);
+            drawingSpace.Graphics.DrawRectangle(virusBrush, _posX, _posY, VIRUS_WIDTH, VIRUS_HEIGHT);
 
 
-            drawingSpace.Graphics.DrawRectangle(blackPen, _posX + VIRUS_WIDTH + 10, _posY, 10, VIRUS_HEIGHT);
-            drawingSpace.Graphics.FillRectangle(healthBrush, _posX + VIRUS_WIDTH + 10, _posY, 10, VIRUS_HEIGHT);
-
-            drawingSpace.Graphics.DrawString($"{this}", TextHelpers.drawFontH4, TextHelpers.writingBrush, X, Y - 35);
-
+            drawingSpace.Graphics.DrawString($"{this}", TextHelpers.drawFont, TextHelpers.writingBrush, X, Y - 35);
         }
 
         // De manière textuelle
         public override string ToString()
         {
-            return $"{Name} ";
-            //return $"{Name} \nY : {_posY} ; X : {_posX}";
+            return $"{Name} \nY : {_posY} ; X : {_posX}";
         }
 
     }

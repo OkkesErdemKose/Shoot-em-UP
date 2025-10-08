@@ -1,15 +1,15 @@
-﻿using Drones.Helpers;
-using Drones.Properties;
+﻿using AntiV.Helpers;
+using AntiV.Properties;
 using System.Resources;
 
-namespace Drones
+namespace AntiV
 {
     // Cette partie de la classe Drone définit comment on peut voir un drone
 
-    public partial class Drone
+    public partial class Antivirus
     {
-        private Image droneImage = Image.FromFile("./Resources/vaisseau.png");
-        private Pen droneBrush = new Pen(new SolidBrush(Color.Purple), 3);
+        private Image antivirusImage = Resources.antivirus;
+        private Pen antivirusBrush = new Pen(new SolidBrush(Color.Purple), 3);
         public const int ANTIVIRUS_WIDTH = 150;
         public const int ANTIVIRUS_HEIGHT = 150;
 
@@ -19,7 +19,7 @@ namespace Drones
         // De manière graphique
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(droneImage, X, Y, ANTIVIRUS_WIDTH, ANTIVIRUS_HEIGHT) ;
+            drawingSpace.Graphics.DrawImage(antivirusImage, X, Y, ANTIVIRUS_WIDTH, ANTIVIRUS_HEIGHT) ;
             drawingSpace.Graphics.DrawLine(new Pen(new SolidBrush(Color.Black), 3), 0, AirSpace.ENNEMIS_AREA_HEIGHT, AirSpace.WIDTH - ANTIVIRUS_WIDTH * 2, AirSpace.ENNEMIS_AREA_HEIGHT);
             drawingSpace.Graphics.DrawLine(new Pen(new SolidBrush(Color.Black), 3), AirSpace.ENNEMIS_AREA_WIDTH, 0, AirSpace.ENNEMIS_AREA_WIDTH, AirSpace.HEIGHT);
 
@@ -42,7 +42,7 @@ namespace Drones
             }
 
 
-            drawingSpace.Graphics.DrawString($"{this}", TextHelpers.drawFontH4, TextHelpers.writingBrush, X, Y - 35);
+            drawingSpace.Graphics.DrawString($"{this}", TextHelpers.drawFont, TextHelpers.writingBrush, X, Y - 35);
         }
 
         // De manière textuelle

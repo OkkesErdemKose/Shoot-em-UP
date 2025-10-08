@@ -1,9 +1,9 @@
 ﻿
 
-using Drones.Helpers;
 using System.Runtime.InteropServices;
 
-namespace Drones
+
+namespace AntiV
 {
     // La classe AirSpace représente le territoire au dessus duquel les drones peuvent voler
     // Il s'agit d'un formulaire (une fenêtre) qui montre une vue 2D depuis en dessus
@@ -22,20 +22,18 @@ namespace Drones
 
 
         public static int ENNEMIS_AREA_WIDTH = AirSpace.WIDTH - 300;
-        public static int ENNEMIS_AREA_HEIGHT = AirSpace.HEIGHT - Drone.ANTIVIRUS_HEIGHT - 30;
+        public static int ENNEMIS_AREA_HEIGHT = AirSpace.HEIGHT - Antivirus.ANTIVIRUS_HEIGHT - 30;
 
         // La flotte est l'ensemble des drones qui évoluent dans notre espace aérien
-        private List<Drone> fleet;
+        private List<Antivirus> fleet;
         private List<Virus> virus;
-        private List<Ammo> ammo;
+        List<Munition> munitions = new List<Munition>();
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
 
-        public static int ENNEMIS_AREA_WEIGHT { get; internal set; }
-
         // Initialisation de l'espace aérien avec un certain nombre de drones
-        public AirSpace(List<Drone> fleet, List<Virus> virus, List<Ammo> ammo)
+        public AirSpace(List<Antivirus> fleet, List<Virus> virus, List<Munition> munitions)
         {
             InitializeComponent();
             // Gets a reference to the current BufferedGraphicsContext
@@ -49,27 +47,48 @@ namespace Drones
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
             this.fleet = fleet;
             this.virus = virus;
-            
+            this.munitions = munitions;
+
         }
 
+        //public void Form1_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    foreach (Drone drone in fleet)
+        //    {
+        //
+        //
+        //        if ((GetAsyncKeyState((int)Keys.Left) & 0x8000) != 0)
+        //            drone.MoveLeft();
+        //
+        //        if ((GetAsyncKeyState((int)Keys.Right) & 0x8000) != 0)
+        //            drone.MoveRight();
+        //
+        //        if ((GetAsyncKeyState((int)Keys.Escape) & 0x8000) != 0)
+        //            Close();
+        //
+        //    }
+        //}
 
         private void DeplacementKeyState()
         {
-            foreach (Drone drone in fleet)
+            foreach (Antivirus av in fleet)
             {
                 if ((GetAsyncKeyState((int)Keys.Left) & 0x8000) != 0)
-                    drone.MoveLeft();
+                    av.MoveLeft();
 
                 if ((GetAsyncKeyState((int)Keys.Right) & 0x8000) != 0)
-                    drone.MoveRight();
+                    av.MoveRight();
 
-               if ((GetAsyncKeyState((int)Keys.Enter) & 0x101) != 0)
+
+                if ((GetAsyncKeyState((int)Keys.Space) & 0x101) != 0)
                 {
-                    continue;
+                    munitions.Add(new Munition(av.X + (Antivirus.ANTIVIRUS_HEIGHT / 2) - (Munition.MUNITION_HEIGHT / 2), av.Y, 1));
                 }
 
+
+
                 if ((GetAsyncKeyState((int)Keys.Escape) & 0x8000) != 0)
-                    continue;
+                    Close();
             }
         }
 
@@ -79,28 +98,12 @@ namespace Drones
         // Affichage de la situation actuelle
         private void Render()
         {
-            Pen brushBlack = new Pen(new SolidBrush(Color.Black), 3);
             airspace.Graphics.Clear(Color.GhostWhite);
 
-            airspace.Graphics.DrawString($"Bonus", TextHelpers.drawFontH1, TextHelpers.writingBrush, (AirSpace.ENNEMIS_AREA_WIDTH + AirSpace.WIDTH) / 2 - 50, 30);
-
-            airspace.Graphics.DrawRectangle(brushBlack, (AirSpace.ENNEMIS_AREA_WIDTH + AirSpace.WIDTH) / 2 - 100, 100, 200, 60);
-
-            airspace.Graphics.DrawRectangle(brushBlack, (AirSpace.ENNEMIS_AREA_WIDTH + AirSpace.WIDTH) / 2 - 100, 210, 200, 60);
-
-            airspace.Graphics.DrawRectangle(brushBlack, (AirSpace.ENNEMIS_AREA_WIDTH + AirSpace.WIDTH) / 2 - 100, 320, 200, 60);
-
-
-
-            airspace.Graphics.DrawString($"Score", TextHelpers.drawFontH2, TextHelpers.writingBrush, AirSpace.ENNEMIS_AREA_WIDTH + 20, 30);
-
-
-            //airspace.Graphics.DrawString($"Nombre de virus : {Program.virus.Count}", TextHelpers.drawFont2, TextHelpers.writingBrush, AirSpace.ENNEMIS_AREA_WIDTH + 30, 30);
-
             // draw drones
-            foreach (Drone drone in fleet)
+            foreach (Antivirus av in fleet)
             {
-                drone.Render(airspace);
+                av.Render(airspace);
             }
 
             foreach (Virus virus in virus)
@@ -109,29 +112,39 @@ namespace Drones
                 {
                     virus.Render(airspace);
 
-
                 }
 
             }
 
-            foreach (Ammo ammo in ammo)
+            foreach (Munition mun in munitions)
             {
-                ammo.Render(airspace);
+                mun.Render(airspace);
+
             }
 
+
+
+            airspace.Render();
         }
 
         // Calcul du nouvel état après que 'interval' millisecondes se sont écoulées
         private void Update(int interval)
         {
-            foreach (Drone drone in fleet)
+            foreach (Antivirus av in fleet)
             {
-                drone.Update(interval);
+                av.Update(interval);
             }
-            foreach (Virus virus in virus)
+            foreach (Virus viru in virus)
             {
-                virus.Update(interval);
+                viru.Update(interval);
             }
+            foreach (Munition mun in munitions)
+            {
+                mun.Update(interval);
+
+
+            }
+            
         }
 
         // Méthode appelée à chaque frame
