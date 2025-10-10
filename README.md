@@ -32,7 +32,7 @@ Le **score** permet de voir notre progression. Plus il est élevée, plus les va
 
 ## Maquettes
 
-![Maquette](./Maquette.png)
+![Maquette](./doc/Maquette.png)
 
 ### 1. Objectif
 * Le joueur doit controler un **vaisseau Antivirus** qui doit éliminer des ennemis qui sont des virus (cercles).
