@@ -22,23 +22,23 @@
 
 Les valeurs possibles du résultat sont: LA (Largement Acquis), A (Acquis), I (Insuffisant), NA (non acquis)
 
-| Critère                    | Résultat | Commentaire |
-| -------------------------- | -------- | ----------- |
-| Avancement Obstacles       |          |             |
-| Avancement Joueur          |          |             |
-| Avancement Tirs            |          |             |
-| Avancement ennemis         |          |             |
-| Avancement score           |          |             |
-| Qualité Présentation       |          |             |
-| Qualité Commentaires       |          |             |
-| Qualité Conventions        |          |             |
-| POO                        |          |             |
-| Processus Journal          |          |             |
-| Processus Git              |          |             |
-| Processus Livraison        |          |             |
-| Expression User Stories    |          |             |
-| Expression Rapport Fome    |          |             |
-| Expression Rapport Contenu |          |             |
-| Ecologie (gitignore)       |          |             |
-| Comportement collectif     |          |             |
-| Comportement individuel    |          |             |
+| Critère                    | Résultat | Commentaire                                                                                                                                                                                                                                                               |
+| -------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Avancement Obstacles       | NA       | Il n'y en a pas                                                                                                                                                                                                                                                           |
+| Avancement Joueur          | A        | je vous suggère fortement d'augmenter la hauteur de la fenêtre pour rendre le jeu un peu plus intéressant, car sinon les virus arrivent trop vite sur le joueur                                                                                                           |
+| Avancement Tirs            | A        |                                                                                                                                                                                                                                                                           |
+| Avancement ennemis         | A        |                                                                                                                                                                                                                                                                           |
+| Avancement score           | NA       |                                                                                                                                                                                                                                                                           |
+| Qualité Présentation       | A        |                                                                                                                                                                                                                                                                           |
+| Qualité Commentaires       | I        | il reste plusieurs commentaires relatifs au Drone                                                                                                                                                                                                                         |
+| Qualité Conventions        | A        |                                                                                                                                                                                                                                                                           |
+| POO                        | A        |                                                                                                                                                                                                                                                                           |
+| Processus Journal          | LA       | Très bien                                                                                                                                                                                                                                                                 |
+| Processus Git              | I        | faites attention à l'atomicité des commits. Vous avez mis 26 changements qui concerne trois choses différentes dans un seul commit : feat(Munition) Ajout des munitions, changement de fichiers pour les doc, et changement de la manière dont les images sont importées. |
+| Processus Livraison        | I        | il y a deux problèmes avec votre livraison: Elle est restée dans un état `Draft` et il manque la grille d'auto évaluation                                                                                                                                                 |
+| Expression User Stories    | I        | je ne trouve ni dans votre repo ni dans votre rapport de formulation claire complète des US. Je vous rappelle que celles-ci doivent être présenté à proximité des maquettes correspondantes.                                                                              |
+| Expression Rapport Forme   | A        | veuillez quand même SVP ajouter une image d'illustration en guise de page de garde du rapport                                                                                                                                                                             |
+| Expression Rapport Contenu | I        | le contenu est, pour ainsi dire inexistant : pas d'analyse fonctionnelle, pas de diagramme de classes, pas d'objectifs clairement énoncés, aucune conclusion<br>Vous avez pas mal de travail à fournir là-dessus.                                                         |
+| Ecologie (gitignore)       | A        |                                                                                                                                                                                                                                                                           |
+| Comportement collectif     | A        |                                                                                                                                                                                                                                                                           |
+| Comportement individuel    | A        |                                                                                                                                                                                                                                                                           |
