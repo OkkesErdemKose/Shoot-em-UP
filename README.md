@@ -21,18 +21,18 @@ Le **score** permet de voir notre progression. Plus il est élevée, plus les va
 
 | User Story                | Semaine (commencement) | Semaine (finalisation) | Remarques |
 | ------------------------- | ---------------------- | ---------------------- | --------- |
-| Fonctionalité de tir      |                        |           -            |           |
+| Fonctionalité de tir      |           5            |           9            |           |
 | Déplacement et controle   |           3            |           5            |           |
 | Gains de coins            |                        |           -            |           |
-| Affichage de score        |                        |           -            |           |
-| Affichage de la vie       |           6            |           -            |           |
+| Affichage de score        |           9            |           9            |           |
+| Affichage de la vie       |           6            |           9            |           |
 | Ennemis                   |           5            |           -            |           |
 
 ---
 
 ## Maquettes
 
-![Maquette](./Maquette.png)
+![Maquette](./doc/Maquette.png)
 
 ### 1. Objectif
 * Le joueur doit controler un **vaisseau Antivirus** qui doit éliminer des ennemis qui sont des virus (cercles).

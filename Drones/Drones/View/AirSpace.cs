@@ -20,14 +20,15 @@ namespace AntiV
         public static readonly int WIDTH = 1400;        // Dimensions of the airspace
         public static readonly int HEIGHT = 700;
 
+        public int score;
 
         public static int ENNEMIS_AREA_WIDTH = AirSpace.WIDTH - 300;
         public static int ENNEMIS_AREA_HEIGHT = AirSpace.HEIGHT - Antivirus.ANTIVIRUS_HEIGHT - 30;
 
         // La flotte est l'ensemble des drones qui évoluent dans notre espace aérien
         private List<Antivirus> fleet;
-        private List<Virus> virus;
-        List<Munition> munitions = new List<Munition>();
+        private List<Virus> viruses;
+        public List<Munition> munitions = new List<Munition>();
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
@@ -46,7 +47,7 @@ namespace AntiV
 
             airspace = currentContext.Allocate(this.CreateGraphics(), this.DisplayRectangle);
             this.fleet = fleet;
-            this.virus = virus;
+            this.viruses = virus;
             this.munitions = munitions;
 
         }
@@ -106,7 +107,7 @@ namespace AntiV
                 av.Render(airspace);
             }
 
-            foreach (Virus virus in virus)
+            foreach (Virus virus in viruses)
             {
                 if(!virus.IsDead)
                 {
@@ -119,6 +120,7 @@ namespace AntiV
             foreach (Munition mun in munitions)
             {
                 mun.Render(airspace);
+
 
             }
 
@@ -134,18 +136,53 @@ namespace AntiV
             {
                 av.Update(interval);
             }
-            foreach (Virus viru in virus)
+
+            foreach (Virus viru in viruses)
             {
                 viru.Update(interval);
             }
+
             foreach (Munition mun in munitions)
             {
                 mun.Update(interval);
-
-
             }
-            
+
+            List<Munition> munitionsToRemove = new List<Munition>();
+            List<Virus> virusToRemove = new List<Virus>();
+
+            foreach (Munition mun in munitions)
+            {
+                Rectangle munRect = new Rectangle(mun.X, mun.Y, Munition.MUNITION_WIDTH, Munition.MUNITION_HEIGHT);
+
+                foreach (Virus virus in viruses)
+                {
+                    if (virus.IsDead) continue;
+
+                    Rectangle virusRect = new Rectangle(virus.X, virus.Y, Virus.VIRUS_WIDTH, Virus.VIRUS_HEIGHT);
+
+                    if (munRect.IntersectsWith(virusRect))
+                    {
+                        virus.Health -= 1; 
+                        munitionsToRemove.Add(mun); 
+
+                        if (virus.Health <= 0)
+                        {
+                            virus.IsDead = true;
+                            virusToRemove.Add(virus);
+                        }
+
+                        break; 
+                    }
+                }
+            }
+
+            foreach (var m in munitionsToRemove)
+                munitions.Remove(m);
+
+            foreach (var v in virusToRemove)
+                viruses.Remove(v);
         }
+
 
         // Méthode appelée à chaque frame
         private void NewFrame(object sender, EventArgs e)

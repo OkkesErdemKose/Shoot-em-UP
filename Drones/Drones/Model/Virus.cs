@@ -15,10 +15,17 @@
         {
             _posX = posX;
             _posY = posY;
+            _health = 100;
             _name = name;
             //_charge = GlobalHelpers.alea.Next(FULLCHARGE); // La charge initiale de la batterie est choisie aléatoirement
         }
-        public int X { 
+        public int Health
+        {
+            get { return _health; }
+            set { _health = value; }
+        }
+        public int X
+        {
             get { return _posX; }
             set { _posX = value; }
         }

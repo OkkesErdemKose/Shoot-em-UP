@@ -30,11 +30,6 @@ namespace AntiV
 
             }
 
-
-
-
-
-
             // Démarrage
             Application.Run(new AirSpace(fleet, virus, munitions));
         }
