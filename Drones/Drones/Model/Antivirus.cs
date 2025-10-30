@@ -6,13 +6,13 @@
         //public static readonly int FULLCHARGE = 100;   // Charge maximale de la batterie
         private int _charge;                            // La charge actuelle de la batterie
         private string _name;                           // Un nom
-        private int _posX;                                 // Position en X depuis la gauche de l'espace aérien
-        private int _posY;                                 // Position en Y depuis le haut de l'espace aérien
+        private float _posX;                                 // Position en X depuis la gauche de l'espace aérien
+        private float _posY;                                 // Position en Y depuis le haut de l'espace aérien
         private int _vitesse;                                 // Vitesse de déplacement
-
+        private int _coins;
 
         // Constructeur
-        public Antivirus(int posX, int posY, string name)
+        public Antivirus(float posX, float posY, string name)
         {
             _posX = posX;
             _posY = posY;
@@ -20,12 +20,12 @@
             _vitesse = 15;
             //_charge = GlobalHelpers.alea.Next(FULLCHARGE); // La charge initiale de la batterie est choisie aléatoirement
         }
-        public int X
+        public float X
         {
             get { return _posX; }
             set { _posX = value; }
         }
-        public int Y {
+        public float Y {
             get { return _posY; } 
             set { _posY = value; }
         }

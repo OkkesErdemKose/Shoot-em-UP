@@ -23,10 +23,10 @@ Le **score** permet de voir notre progression. Plus il est élevée, plus les va
 | ------------------------- | ---------------------- | ---------------------- | --------- |
 | Fonctionalité de tir      |           5            |           9            |           |
 | Déplacement et controle   |           3            |           5            |           |
-| Gains de coins            |                        |           -            |           |
+| Gains de coins            |           9            |           9            |           |
 | Affichage de score        |           9            |           9            |           |
 | Affichage de la vie       |           6            |           9            |           |
-| Ennemis                   |           5            |           -            |           |
+| Ennemis                   |           5            |           9            |           |
 
 ---
 
@@ -43,10 +43,10 @@ Le **score** permet de voir notre progression. Plus il est élevée, plus les va
 ### 2. Vaisseau
 * **Antivirus (joueur)** :
 
-  * Représenté par un triangle.
-  * Possède une **barre de vie** (100 points), qui augmentera au fil de la partie.
+  * Représenté par un vaisseau antivirus.
   * Tire des projectiles qui font des dégâts de plus en plus elevée au fil de la partie.
   * Améliorable via des bonus (vitesse, dégâts, vie).
+  * Le vaisseau a une protection qui peut se prendre maximum 5 virus, après cela la partie se termine.
 
 ---
 
@@ -54,20 +54,19 @@ Le **score** permet de voir notre progression. Plus il est élevée, plus les va
 
 * **Virus (ennemis)** :
 
-  * Représentés par des cercles.
-  * Niveaux indiquées.
-  * Barre de vie.
-  * Tirent des projectiles vers le vaisseau (joueur).
+  * Représentés par des images de virus.
+  * Barre vie qui représente la vie restante.
+  * Avec un nom.
+
 
 ---
 
 ### 4. Ressources et progression
 
-* **Coins** : monnaie pour acheter des bonus (affichée en haut à gauche).
-* **Score** : augmente selon les éliminations (affiché en haut à droite).
+* **Coins** : monnaie pour acheter des bonus.
+* **Score** : augmente selon les éliminations.
 * **Bonus** (menu à droite) :
 
-  * Vitesse du vaisseau
   * Dégâts
   * Vie du vaisseau
 

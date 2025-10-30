@@ -18,8 +18,8 @@ namespace AntiV
 
             int barWidth = 10;
             int barHeight = VIRUS_HEIGHT;
-            int barX = _posX + VIRUS_WIDTH + 5;
-            int barY = _posY;
+            int barX = (int)_posX + VIRUS_WIDTH + 5;
+            int barY = (int)_posY;
 
             float healthPercent = (float)Health / MaxHealth;
             int currentBarHeight = (int)(barHeight * healthPercent);

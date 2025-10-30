@@ -7,9 +7,10 @@
         private int _health;                          
         private int _maxHealth = 5;                          
         private string _name;                         
-        private int _posX;                               
-        private int _posY;
+        private float _posX;                               
+        private float _posY;
         private bool _isDead = false;
+        private float _speed= 0.3f;
 
         // Constructeur
         public Virus(int posX, int posY, string name)
@@ -30,12 +31,12 @@
             get { return _maxHealth; }
             set { _maxHealth = value; }
         }
-        public int X
+        public float X
         {
             get { return _posX; }
             set { _posX = value; }
         }
-        public int Y { 
+        public float Y { 
             get { return _posY; }
             set { _posY = value; }
         }
@@ -47,29 +48,31 @@
             get { return _isDead; }
             set { _isDead = value; }
         }
-
+        public float Speed
+        { 
+            get { return _speed; }
+            set { _speed = value; }
+        }
 
         // Cette méthode calcule le nouvel état dans lequel le drone se trouve après
         // que 'interval' millisecondes se sont écoulées
-        public void Update(int interval)
+        public void Update(int interval, AirSpace airSpace)
         {
-
-
-            if (!(_posY == AirSpace.ENNEMIS_AREA_HEIGHT - VIRUS_HEIGHT))
+            if (_posY < AirSpace.ENNEMIS_AREA_HEIGHT - VIRUS_HEIGHT)
             {
-                _posY += 1;
+                _posY += _speed;
             }
             else
             {
                 _posY = AirSpace.ENNEMIS_AREA_HEIGHT - VIRUS_HEIGHT;
                 _isDead = true;
-                Console.WriteLine($"{Name} a touché le bord et à explosé");
+
+                airSpace.RemoveHealthToBarrer();
+
+                Console.WriteLine($"{Name} a touché le bord et a explosé");
             }
-
-
-
-
         }
+
 
 
     }

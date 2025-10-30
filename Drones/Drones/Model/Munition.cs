@@ -10,26 +10,26 @@ namespace AntiV
     public partial class Munition
     {
 
-        private int _posX;                               
-        private int _posY;
-        private int _ammoSpeed;
+        private float _posX;                               
+        private float _posY;
+        private float _ammoSpeed;
 
         // Constructeur
-        public Munition(int posX, int posY, int ammoSpeed)
+        public Munition(float posX, float posY, float ammoSpeed)
         {
             _posX = posX;
             _posY = posY;
             _ammoSpeed = ammoSpeed;
         }
-        public int X { 
+        public float X { 
             get { return _posX; }
             set { _posX = value; }
         }
-        public int Y { 
+        public float Y { 
             get { return _posY; }
             set { _posY = value; }
         }
-        public int AmmoSpeed
+        public float AmmoSpeed
         {
             get { return _ammoSpeed; }
             set { _ammoSpeed = value; }
