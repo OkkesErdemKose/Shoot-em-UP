@@ -42,14 +42,14 @@ namespace AntiV
             }
 
 
-            drawingSpace.Graphics.DrawString($"{this}", TextHelpers.drawFont, TextHelpers.writingBrush, X, Y - 35);
+            //drawingSpace.Graphics.DrawString($"{this}", TextHelpers.drawFont, TextHelpers.writingBrush, X, Y - 35);
         }
 
         // De manière textuelle
-        public override string ToString()
-        {
-            return $"{Name} \nX : {_posX} ; Y : {_posY}";
-        }
+        //public override string ToString()
+        //{
+        //    return $"{Name}";
+        //}
 
     }
 }

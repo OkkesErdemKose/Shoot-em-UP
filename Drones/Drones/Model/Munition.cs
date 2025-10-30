@@ -41,7 +41,7 @@ namespace AntiV
         // que 'interval' millisecondes se sont écoulées
         public void Update(int interval)
         {
-            _posY -= 5;
+            _posY -= _ammoSpeed;
 
 
 
