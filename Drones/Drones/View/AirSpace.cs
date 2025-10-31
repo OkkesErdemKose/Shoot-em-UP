@@ -1,4 +1,5 @@
 ﻿using AntiV.Helpers;
+using AntiV.Properties;
 using System.Runtime.InteropServices;
 
 namespace AntiV
@@ -28,7 +29,7 @@ namespace AntiV
         public int ammo = 0;
         public float virusSpeed = 0.3f; 
 
-        static public int barrerHealth = 3;
+        static public int barrerHealth = 1;
 
         public static int ENNEMIS_AREA_WIDTH = WIDTH - 300;
         public static int ENNEMIS_AREA_HEIGHT = HEIGHT - Antivirus.ANTIVIRUS_HEIGHT - 30;
@@ -69,14 +70,19 @@ namespace AntiV
                 if ((GetAsyncKeyState((int)Keys.Right) & 0x8000) != 0)
                     av.MoveRight();
 
-                if ((GetAsyncKeyState((int)Keys.Space) & 0x101) != 0)
+                if ((GetAsyncKeyState((int)Keys.Space) & 0x8000) != 0)
+                {
                     munitions.Add(new Munition(av.X + (Antivirus.ANTIVIRUS_HEIGHT / 2) - (Munition.MUNITION_HEIGHT / 2), av.Y, 10));
+
+
+                }
+
 
                 if ((GetAsyncKeyState((int)Keys.Escape) & 0x8000) != 0)
                     Close();
             }
 
-            // Gestion des achats Q / W avec debounce (évite achats répétés quand touche maintenue)
+
             bool qDown = (GetAsyncKeyState((int)Keys.Q) & 0x8000) != 0;
             if (qDown && !qDownPrev)
                 BuyDamageBonus();
@@ -93,10 +99,10 @@ namespace AntiV
             if (coins >= damagePrice)
             {
                 coins -= damagePrice;
-                damageMultiplier += 1.1f;
+                damageMultiplier += 2.3f;
 
-                int increase = (int)(damagePrice * 0.25f) + (level * 10);
-                damagePrice += Math.Max(1, increase);
+                int augmentePrice = (int)(damagePrice * 0.15f) + (level * 3);
+                damagePrice += Math.Max(1, augmentePrice);
             }
         }
 
@@ -107,12 +113,12 @@ namespace AntiV
                 coins -= barrierPrice;
                 barrerHealth += 1;
 
-                int increase = (int)(barrierPrice * 0.5f) + (level * 20);
-                barrierPrice += Math.Max(1, increase);
+                int augmentePrice = (int)(barrierPrice * 0.5f) + (level * 20);
+                barrierPrice += Math.Max(1, augmentePrice);
             }
         }
 
-        private int EffectiveDamage => (int)(baseDamage * damageMultiplier);
+        private int munitionsDamage => (int)(baseDamage * damageMultiplier);
 
         private void Render()
         {
@@ -136,7 +142,7 @@ namespace AntiV
 
             airspace.Graphics.DrawString($"Prix : {damagePrice}", TextHelpers.h3, TextHelpers.writingBrush, rightPanelX + 60, HEIGHT - 590);
             airspace.Graphics.DrawString($"x{damageMultiplier:F1}", TextHelpers.h3, TextHelpers.writingBrush, rightPanelX + 180, HEIGHT - 590);
-            airspace.Graphics.DrawString($"Dégâts : {EffectiveDamage}", TextHelpers.h3, TextHelpers.writingBrush, rightPanelX + 60, HEIGHT - 560);
+            airspace.Graphics.DrawString($"Dégâts : {munitionsDamage}", TextHelpers.h3, TextHelpers.writingBrush, rightPanelX + 60, HEIGHT - 560);
             airspace.Graphics.DrawString("[Q]", TextHelpers.h4, TextHelpers.writingBrush, rightPanelX + 190, HEIGHT - 540);
 
             Rectangle bonusRect2 = new Rectangle(rightPanelX + 50, HEIGHT - 500, 180, 80);
@@ -155,11 +161,10 @@ namespace AntiV
             airspace.Graphics.DrawString($"Coins : {coins}", TextHelpers.h1, TextHelpers.writingBrush, rightPanelX, HEIGHT - 140);
             airspace.Graphics.DrawString($"Score : {score}", TextHelpers.h1, TextHelpers.writingBrush, rightPanelX, HEIGHT - 70);
 
-            TimeSpan elapsed = DateTime.Now - startTime;
+            TimeSpan elapsed = DateTime.Now - startTime;  
             string elapsedStr = string.Format("{0:D2}:{1:D2}:{2:D2}", elapsed.Hours, elapsed.Minutes, elapsed.Seconds);
-            airspace.Graphics.DrawString($"Temps de jeu : {elapsedStr}", TextHelpers.h3, TextHelpers.writingBrush, 10, 10);
-
-            airspace.Graphics.DrawString($"Dégâts/current : {EffectiveDamage}", TextHelpers.h3, TextHelpers.writingBrush, 10, 40);
+            airspace.Graphics.DrawString($"Temps de jeux : {elapsedStr}", TextHelpers.h3, TextHelpers.writingBrush, rightPanelX, 15);
+            airspace.Graphics.DrawString($"Dégats actuel : {munitionsDamage}", TextHelpers.h3, TextHelpers.writingBrush, rightPanelX, 40);
 
             airspace.Render();
         }
@@ -193,7 +198,7 @@ namespace AntiV
 
                     if (munRect.IntersectsWith(virusRect))
                     {
-                        virus.Health -= EffectiveDamage;
+                        virus.Health -= munitionsDamage;
                         munitionsToRemove.Add(mun);
 
                         if (virus.Health <= 0)
@@ -215,7 +220,10 @@ namespace AntiV
                 munitions.Remove(m);
 
             foreach (var v in virusToRemove)
+            {
+                v.Texture = Resources.explosion;
                 viruses.Remove(v);
+            }
 
             if (viruses.All(v => v.IsDead))
                 NextLevel();
@@ -224,6 +232,7 @@ namespace AntiV
         public void RemoveHealthToBarrer()
         {
             barrerHealth--;
+
             if (barrerHealth <= 0)
             {
                 barrerHealth = 0;
@@ -237,7 +246,7 @@ namespace AntiV
         {
             level++;
             barrerHealth += 1;
-            int newVirusCount = RandomHelpers.Rnd(4, 7);
+            int newVirusCount = RandomHelpers.Rnd(4, 20);
             int newMaxHealth = 5 + level;
             virusSpeed += 0.1f;
 

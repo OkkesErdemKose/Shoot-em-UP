@@ -6,7 +6,7 @@ namespace AntiV
 {
     public partial class Virus
     {
-        private Image virusImage = Resources.virus;
+
 
         public const int VIRUS_WIDTH = 90;
         public const int VIRUS_HEIGHT = 90;
@@ -14,7 +14,7 @@ namespace AntiV
         public void Render(BufferedGraphics drawingSpace)
         {
 
-            drawingSpace.Graphics.DrawImage(virusImage, _posX, _posY, VIRUS_WIDTH, VIRUS_HEIGHT);
+            drawingSpace.Graphics.DrawImage(Texture, _posX, _posY, VIRUS_WIDTH, VIRUS_HEIGHT);
 
             int barWidth = 10;
             int barHeight = VIRUS_HEIGHT;

@@ -12,7 +12,7 @@ namespace AntiV
             ApplicationConfiguration.Initialize();
 
             var fleet = InitializeFleet();
-            var virus = GenerateViruses(RandomHelpers.Rnd(5, 7));
+            var virus = GenerateViruses(RandomHelpers.Rnd(5, 117));
             var munitions = new List<Munition>();
 
             Application.Run(new AirSpace(fleet, virus, munitions));

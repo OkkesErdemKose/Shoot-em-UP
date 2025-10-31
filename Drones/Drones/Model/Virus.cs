@@ -1,4 +1,6 @@
-﻿namespace AntiV
+﻿using AntiV.Properties;
+
+namespace AntiV
 {
     // Cette partie de la classe Drone définit ce qu'est un drone par un modèle numérique
     public partial class Virus
@@ -11,6 +13,7 @@
         private float _posY;
         private bool _isDead = false;
         private float _speed= 0.3f;
+        private Image _texture;
 
         // Constructeur
         public Virus(int posX, int posY, string name)
@@ -19,7 +22,13 @@
             _posY = posY;
             _health = 5;
             _name = name;
+            _texture = Resources.virus;
             //_charge = GlobalHelpers.alea.Next(FULLCHARGE); // La charge initiale de la batterie est choisie aléatoirement
+        }
+        public Image Texture
+        {
+            get { return _texture; }
+            set { _texture = value; }
         }
         public int Health
         {
@@ -64,6 +73,7 @@
             }
             else
             {
+                _texture = Resources.explosion;
                 _posY = AirSpace.ENNEMIS_AREA_HEIGHT - VIRUS_HEIGHT;
                 _isDead = true;
 
