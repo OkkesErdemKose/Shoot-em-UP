@@ -6,7 +6,7 @@ namespace AntiV
 {
     public partial class Obstacle
     {
-        private Image obstacleImage = Resources.pare_feu;
+        private Image _obstacleImage = Resources.pare_feu;
 
         public const int OBSTACLE_WIDTH = 100;
         public const int OBSTACLE_HEIGHT = 100;
@@ -14,7 +14,7 @@ namespace AntiV
 
         public void Render(BufferedGraphics drawingSpace)
         {
-            drawingSpace.Graphics.DrawImage(obstacleImage, X, Y, OBSTACLE_WIDTH, OBSTACLE_HEIGHT);
+            drawingSpace.Graphics.DrawImage(_obstacleImage, X, Y, OBSTACLE_WIDTH, OBSTACLE_HEIGHT);
 
 
             for (int i = 0; i < Health; i++)

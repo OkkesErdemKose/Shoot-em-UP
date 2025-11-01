@@ -16,12 +16,12 @@ namespace AntiV
         public int coins = 0;
 
 
-        private int baseDamage = 2;
+        public int baseDamage = 2;
 
-        private float damageMultiplier = 1.0f;
+        public float damageMultiplier = 1.0f;
 
-        private int damagePrice = 10;
-        private int barrierPrice = 1;
+        public int damagePrice = 10;
+        public int barrierPrice = 1;
 
         public int level = 1;
         public int kills = 0;
@@ -34,7 +34,7 @@ namespace AntiV
         public static int ENNEMIS_AREA_WIDTH = WIDTH - 300;
         public static int ENNEMIS_AREA_HEIGHT = HEIGHT - Antivirus.ANTIVIRUS_HEIGHT - 30;
 
-        private List<Antivirus> fleet;
+        public List<Antivirus> fleet;
         static public List<Virus> viruses;
         public List<Munition> munitions = new List<Munition>();
         public List<Obstacle> obstacles = new List<Obstacle>();
@@ -42,10 +42,10 @@ namespace AntiV
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
 
-        private bool qDownPrev = false;
-        private bool wDownPrev = false;
+        public bool qDownPrev = false;
+        public bool wDownPrev = false;
 
-        private DateTime startTime;
+        public DateTime startTime;
 
         public AirSpace(List<Antivirus> fleet, List<Virus> virus, List<Munition> munitions, List<Obstacle> obstacles)
         {

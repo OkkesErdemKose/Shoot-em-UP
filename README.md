@@ -1,89 +1,114 @@
 # Projet Shoot'em Up
 
-## Introduction
+## 1. Introduction
 
-**Shoot'em Up** est un petit jeu en 2D développée en **C#**. Le but est simple : on contrôle un vaisseau qui doit se défendre contre des ennemis en leur tirant dessus.
+**Shoot'em Up** est un jeu 2D développé en **C#**. Le joueur contrôle un **vaisseau antivirus** qui doit éliminer des ennemis (fichiers malveillants comme des `.exe` ou des trojans) pour protéger le système.  
 
-Le thème du jeu tourne autour de **l'informatique**. Le vaisseau représente un **antivirus**, et les ennemis sont des **fichiers malveillants** comme des `.exe` ou des **trojans** qui essaient de rentrer dans le système. Le joueur doit donc empêcher ces intrusions en les éliminant.
+À chaque tir réussi sur un ennemi :  
+- L’ennemi perd de la vie.  
+- Le joueur gagne des **coins**.  
+- Le **score** augmente.  
 
-A chque tir réussi sur un ennemi :
-- L’ennemi perd de la vie 
-- Le joueur gagne des **coins** 
-- Le **score** augmente
-
-Quand un ennemi est détruit, on gagne encore plus de coins. Ces coins permettent d’acheter des **bonus pendant la partie** : comme aller plus vite, faire plus de dégâts, regagner de la vie, ou avoir un multiplicateur de score.
-
-Le **score** permet de voir notre progression. Plus il est élevée, plus les vagues d'ennemis deviennent compliqués. Il y a aussi une section appelé **"Compteurs"** qui affiche quelques statistiques sur la partie.
+Les coins permettent d’acheter des **bonus** pendant la partie : vitesse, dégâts, régénération de vie, multiplicateur de score.  
+Le score reflète la progression : plus il est élevé, plus les vagues d’ennemis deviennent difficiles.
 
 ---
 
-## Planification
+## 2. Planification
 
-| User Story                | Semaine (commencement) | Semaine (finalisation) | Remarques |
-| ------------------------- | ---------------------- | ---------------------- | --------- |
-| Fonctionalité de tir      |           5            |           9            |           |
-| Déplacement et controle   |           3            |           5            |           |
-| Gains de coins            |           9            |           9            |           |
-| Affichage de score        |           9            |           9            |           |
-| Affichage de la vie       |           6            |           9            |           |
-| Ennemis                   |           5            |           9            |           |
+| User Story                | Semaine (début) | Semaine (fin) | Remarques |
+| ------------------------- | --------------- | ------------- | --------- |
+| Fonctionnalité de tir     | 5               | 9             |           |
+| Déplacement et contrôle   | 3               | 5             |           |
+| Gains de coins            | 9               | 9             |           |
+| Affichage de score        | 9               | 9             |           |
+| Affichage de la vie       | 6               | 9             |           |
+| Ennemis                   | 5               | 9             |           |
 
----
-
-## Maquettes
+## 3. Maquette
 
 ![Maquette](./doc/Maquette.png)
 
-### 1. Objectif
-* Le joueur doit controler un **vaisseau Antivirus** qui doit éliminer des ennemis qui sont des virus (cercles).
-* L'objectif est de survivre le plus longtemps possible et de faire que son score soit le plus haut possible en tuant les ennemis.
-
 ---
 
-### 2. Vaisseau
-* **Antivirus (joueur)** :
+## 4. User Stories
 
-  * Représenté par un vaisseau antivirus.
-  * Tire des projectiles qui font des dégâts de plus en plus elevée au fil de la partie.
-  * Améliorable via des bonus (vitesse, dégâts, vie).
-  * Le vaisseau a une protection qui peut se prendre maximum 5 virus, après cela la partie se termine.
+- **Déplacement et contrôle** : le joueur peut déplacer le vaisseau à gauche et à droite pour éviter les tirs et se positionner pour tirer.  
 
----
+- **Affichage de la vie** : chaque entité a une barre de vie verticale et un nombre précis affiché.  
 
-### 3. Ennemis
+- **Fonctionnalité de tir** : appuyer sur ESPACE pour tirer des projectiles qui font des dégâts, amélioration possible via coins.  
 
-* **Virus (ennemis)** :
+- **Affichage de score** : tuer des ennemis augmente le score et la difficulté de la partie.  
 
-  * Représentés par des images de virus.
-  * Barre vie qui représente la vie restante.
-  * Avec un nom.
+- **Ennemis** : descendent verticalement et infligent des dégâts si atteignent le bas ou tirent sur le joueur.  
+
+- **Gains de coins** : gagner des coins pour acheter des boosts (vie, dégâts, vitesse, etc.).
+
+## 5. Objectif
+* Survie du **vaisseau antivirus**.  
+* Éliminer les ennemis pour maximiser le score.  
 
 
----
+## 6. Entitées
 
-### 4. Ressources et progression
+### Vaisseau
+* Tire des projectiles dont les dégâts peuvent évoluer.  
+* Améliorable via des bonus (vitesse, dégâts, vie).  
+* Protection limitée : maximum 5 impacts ennemis avant la fin de la partie.  
 
-* **Coins** : monnaie pour acheter des bonus.
-* **Score** : augmente selon les éliminations.
-* **Bonus** (menu à droite) :
+### Ennemis
+* **Virus** : descendent verticalement pour atteindre le bas de l’écran.  
+  * Barre de vie affichée.  
+  * Inflige des dégâts si atteint le bas.  
 
-  * Dégâts
-  * Vie du vaisseau
+### Obstacles
+* **Pare-Feu** : murs de protection.  
+  * Trois rectangles verts représentant la vie.  
+  * Casse après 3 impacts.  
 
----
+### Ressources et progression
+* **Coins** : monnaie pour acheter des bonus.  
+* **Score** : augmente en éliminant les ennemis.  
+* **Bonus** : améliorations des dégâts, vie, vitesse.  
 
-### 5. Compteurs et statistiques
+## 6. Compteurs et statistiques
+* **Éliminations** : nombre d’ennemis détruits.  
+* **Munitions tirées** : total des projectiles lancés.  
 
-* **Éliminations** : nombre d’ennemis détruits.
-* **Munitions tirées** : total de projectiles lancés.
+## 7. Interactions principales
+1. Déplacements du vaisseau.  
+2. Tirs sur les ennemis.  
+3. Gestion des coins pour acheter des améliorations.  
+4. Survie et stratégie pour éviter les tirs ennemis.  
 
----
 
-### 6. Interactions principales
+## 8. Diagramme de classes UML
 
-1. **Déplacements** : le joueur contrôle son Antivirus.
-2. **Tirs** : le joueur tire pour éliminer les ennemis.
-3. **Gestion de coins** : dépenser les coins pour améliorer son vaisseau.
-4. **Survie** : éviter les projectiles ennemis.
+![UML](./doc/UML_image.png)
 
-### 7. Diagramme de classes
+## 9. Description des classes
+
+- **AirSpace** :  
+  Classe principale qui gère l’affichage, le lancement de la partie et les interactions globales du jeu.  
+
+- **Obstacles** :  
+  Représente les murs et barrières.  
+  * Gère la vie des obstacles et leur destruction après plusieurs impacts.  
+
+- **Antivirus** :  
+  Représente le vaisseau joueur.  
+  * Gestion des déplacements, des tirs et de la vie.  
+  * Applique les bonus achetés.  
+
+- **Virus** :  
+  Représente les ennemis qui descendent verticalement.  
+  * Possède une barre de vie et inflige des dégâts au joueur.  
+
+- **Munitions** :  
+  Gère les projectiles tirés par le joueur.  
+  * Inflige des dégâts aux ennemis.  
+  * Possibilité d’évolution des dégâts selon les bonus.  
+
+
+
