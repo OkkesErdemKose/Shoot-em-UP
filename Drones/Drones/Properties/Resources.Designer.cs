@@ -93,6 +93,16 @@ namespace AntiV.Properties {
         /// <summary>
         ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap pare_feu {
+            get {
+                object obj = ResourceManager.GetObject("pare_feu", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Recherche une ressource localisée de type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap virus {
             get {
                 object obj = ResourceManager.GetObject("virus", resourceCulture);

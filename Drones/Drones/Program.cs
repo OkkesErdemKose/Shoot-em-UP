@@ -12,10 +12,11 @@ namespace AntiV
             ApplicationConfiguration.Initialize();
 
             var fleet = InitializeFleet();
-            var virus = GenerateViruses(RandomHelpers.Rnd(5, 117));
+            var virus = GenerateViruses(RandomHelpers.Rnd(4, 10));
+            var obstacles = GenerateObstacles(5);
             var munitions = new List<Munition>();
 
-            Application.Run(new AirSpace(fleet, virus, munitions));
+            Application.Run(new AirSpace(fleet, virus, munitions, obstacles));
         }
 
         private static List<Antivirus> InitializeFleet()
@@ -41,6 +42,21 @@ namespace AntiV
             }
 
             return virusList;
+        }
+
+        private static List<Obstacle> GenerateObstacles(int obstaclesCount)
+        {
+            var obstaclesList = new List<Obstacle>();
+
+            for (int i = 0; i < obstaclesCount; i++)
+            {
+                int x = RandomHelpers.Rnd(0, AirSpace.ENNEMIS_AREA_WIDTH - Virus.VIRUS_WIDTH);
+                int y = RandomHelpers.Rnd(200, 400);
+
+                obstaclesList.Add(new Obstacle(x, y));
+            }
+
+            return obstaclesList;
         }
     }
 }

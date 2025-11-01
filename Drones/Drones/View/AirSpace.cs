@@ -21,7 +21,7 @@ namespace AntiV
         private float damageMultiplier = 1.0f;
 
         private int damagePrice = 10;
-        private int barrierPrice = 100;
+        private int barrierPrice = 1;
 
         public int level = 1;
         public int kills = 0;
@@ -35,8 +35,9 @@ namespace AntiV
         public static int ENNEMIS_AREA_HEIGHT = HEIGHT - Antivirus.ANTIVIRUS_HEIGHT - 30;
 
         private List<Antivirus> fleet;
-        private List<Virus> viruses;
+        static public List<Virus> viruses;
         public List<Munition> munitions = new List<Munition>();
+        public List<Obstacle> obstacles = new List<Obstacle>();
 
         BufferedGraphicsContext currentContext;
         BufferedGraphics airspace;
@@ -46,7 +47,7 @@ namespace AntiV
 
         private DateTime startTime;
 
-        public AirSpace(List<Antivirus> fleet, List<Virus> virus, List<Munition> munitions)
+        public AirSpace(List<Antivirus> fleet, List<Virus> virus, List<Munition> munitions, List<Obstacle> obstacles)
         {
             InitializeComponent();
             currentContext = BufferedGraphicsManager.Current;
@@ -54,8 +55,9 @@ namespace AntiV
             this.KeyPreview = true;
 
             this.fleet = fleet;
-            this.viruses = virus;
+            AirSpace.viruses = virus;
             this.munitions = munitions;
+            this.obstacles = obstacles;
 
             startTime = DateTime.Now;
         }
@@ -134,6 +136,9 @@ namespace AntiV
             foreach (Munition mun in munitions)
                 mun.Render(airspace);
 
+            foreach (Obstacle obs in obstacles)
+                obs.Render(airspace);
+
             int rightPanelX = ENNEMIS_AREA_WIDTH + 10;
 
             Rectangle bonusRect1 = new Rectangle(rightPanelX + 50, HEIGHT - 600, 180, 80);
@@ -154,10 +159,11 @@ namespace AntiV
             airspace.Graphics.DrawString($"Barrière", TextHelpers.h3, TextHelpers.writingBrush, rightPanelX + 60, HEIGHT - 460);
             airspace.Graphics.DrawString("[W]", TextHelpers.h4, TextHelpers.writingBrush, rightPanelX + 190, HEIGHT - 440);
 
-            airspace.Graphics.DrawString($"Compteurs", TextHelpers.h1, TextHelpers.writingBrush, rightPanelX, HEIGHT - 320);
-            airspace.Graphics.DrawString($"Niveau :                 {level}", TextHelpers.h3, TextHelpers.writingBrush, rightPanelX, HEIGHT - 260);
-            airspace.Graphics.DrawString($"Éliminées :             {kills}", TextHelpers.h3, TextHelpers.writingBrush, rightPanelX, HEIGHT - 230);
-            airspace.Graphics.DrawString($"Vie du barrière :      {barrerHealth}", TextHelpers.h3, TextHelpers.writingBrush, rightPanelX, HEIGHT - 200);
+            airspace.Graphics.DrawString($"Compteurs", TextHelpers.h1, TextHelpers.writingBrush, rightPanelX, HEIGHT - 370);
+            airspace.Graphics.DrawString($"Niveau :                         {level}", TextHelpers.h3, TextHelpers.writingBrush, rightPanelX, HEIGHT - 320);
+            airspace.Graphics.DrawString($"Éliminées :                     {kills}", TextHelpers.h3, TextHelpers.writingBrush, rightPanelX, HEIGHT - 290);
+            airspace.Graphics.DrawString($"Vie de la barrière :         {barrerHealth}", TextHelpers.h3, TextHelpers.writingBrush, rightPanelX, HEIGHT - 260);
+            airspace.Graphics.DrawString($"Virus restants :              {viruses.Count}", TextHelpers.h3, TextHelpers.writingBrush, rightPanelX, HEIGHT - 230);
             airspace.Graphics.DrawString($"Coins : {coins}", TextHelpers.h1, TextHelpers.writingBrush, rightPanelX, HEIGHT - 140);
             airspace.Graphics.DrawString($"Score : {score}", TextHelpers.h1, TextHelpers.writingBrush, rightPanelX, HEIGHT - 70);
 
@@ -174,6 +180,12 @@ namespace AntiV
             foreach (Antivirus av in fleet)
                 av.Update(interval);
 
+            foreach (Obstacle obs in obstacles)
+            {
+                if (!obs.IsBroken)
+                    obs.Update(interval);
+            }
+
             foreach (Virus viru in viruses)
             {
                 if (!viru.IsDead)
@@ -185,6 +197,7 @@ namespace AntiV
 
             List<Munition> munitionsToRemove = new List<Munition>();
             List<Virus> virusToRemove = new List<Virus>();
+            List<Obstacle> obstacleToRemove = new List<Obstacle>();
 
             foreach (Munition mun in munitions)
             {
@@ -216,8 +229,19 @@ namespace AntiV
                 }
             }
 
+            foreach(Obstacle obs in obstacles)
+            {
+                if (obs.IsBroken == true)
+                {
+                    obstacleToRemove.Add(obs);
+                }
+            }
+
             foreach (var m in munitionsToRemove)
                 munitions.Remove(m);
+
+            foreach (var o in obstacleToRemove)
+                obstacles.Remove(o);
 
             foreach (var v in virusToRemove)
             {
@@ -246,11 +270,12 @@ namespace AntiV
         {
             level++;
             barrerHealth += 1;
-            int newVirusCount = RandomHelpers.Rnd(4, 20);
+            int newVirusCount = RandomHelpers.Rnd(4, 10);
             int newMaxHealth = 5 + level;
             virusSpeed += 0.1f;
 
             viruses.Clear();
+
 
             for (int i = 0; i < newVirusCount; i++)
             {

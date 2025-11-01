@@ -86,3 +86,4 @@ Le **score** permet de voir notre progression. Plus il est élevée, plus les va
 3. **Gestion de coins** : dépenser les coins pour améliorer son vaisseau.
 4. **Survie** : éviter les projectiles ennemis.
 
+### 7. Diagramme de classes

@@ -14,7 +14,7 @@ namespace AntiV
         public void Render(BufferedGraphics drawingSpace)
         {
 
-            drawingSpace.Graphics.DrawImage(Texture, _posX, _posY, VIRUS_WIDTH, VIRUS_HEIGHT);
+            drawingSpace.Graphics.DrawImage(Resources.virus, _posX, _posY, VIRUS_WIDTH, VIRUS_HEIGHT);
 
             int barWidth = 10;
             int barHeight = VIRUS_HEIGHT;
