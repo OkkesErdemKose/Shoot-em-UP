@@ -42,3 +42,25 @@ Les valeurs possibles du résultat sont: LA (Largement Acquis), A (Acquis), I (I
 | Ecologie (gitignore)       | A        |                                                                                                                                                                                                                                                                           |
 | Comportement collectif     | A        |                                                                                                                                                                                                                                                                           |
 | Comportement individuel    | A        |                                                                                                                                                                                                                                                                           |
+## Final
+
+la livraison est incomplète. Il manque les pièces jointes (journal et rapport)
+
+vous n'avez pas tenu compte de mon feed-back à 80 % dans lequel je vous demandais une image illustrative en couverture du rapport
+
+votre introduction contient les objectifs produits, mais il n'y a pas trace des objectifs pédagogiques
+
+le rapport est largement insuffisant au final. L'analyse fonctionnelle ne répond pas aux format demandé (user stories avec tests d'acceptance), il n'y a pas de diagramme de classe, il manque la section décrivant l'usage que vous avez fait de l'IA durant votre projet (demandé)
+
+j'ai bien vu que vous avez un diagramme U ML dans votre dossier doc, mais ce n'est pas suffisant. Il doit être inclus dans le rapport avec des explications complémentaires. D'autre part, j'ai bien insisté pour que le diagramme ne soit pas une capture d'écran mais une image proprement exportée.
+
+le programme est fonctionnel et complet.
+
+Je constate d'après votre journal de travail et vos commits Git que vous avez fourni un effort conséquent pour finaliser le projet. J'aimerais que ces efforts soient récompensés, mais je ne peux pas accepter le rapport dans l'état où il est actuellement. Par conséquent, je vous accorde un délai supplémentaire pour éliminer les gros défauts de votre rapport:
+
+  - pas d'image, illustrative
+  - pas d'objectif pédagogique
+  - pas de diagramme UML
+  - pas de section IA
+ 
+ vous avez jusqu'au 8 novembre pour me refaire une livraison
