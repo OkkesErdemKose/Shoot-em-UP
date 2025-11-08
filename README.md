@@ -1,114 +1,219 @@
 # Projet Shoot'em Up
 
-## 1. Introduction
+## Ilustration
+![Couverture](./doc/preview.png)
 
-**Shoot'em Up** est un jeu 2D développé en **C#**. Le joueur contrôle un **vaisseau antivirus** qui doit éliminer des ennemis (fichiers malveillants comme des `.exe` ou des trojans) pour protéger le système.  
 
-À chaque tir réussi sur un ennemi :  
+## Introduction
+
+**Shoot'em Up** est un jeu 2D développé en **C#**.  
+Le joueur contrôle un **vaisseau antivirus** qui doit éliminer des ennemis pour protéger le système.
+
+À chaque élimination :  
 - L’ennemi perd de la vie.  
 - Le joueur gagne des **coins**.  
 - Le **score** augmente.  
 
 Les coins permettent d’acheter des **bonus** pendant la partie : vitesse, dégâts, régénération de vie, multiplicateur de score.  
-Le score reflète la progression : plus il est élevé, plus les vagues d’ennemis deviennent difficiles.
+Le score reflète la progression du joueur : plus il est élevée, plus les vagues d’ennemis deviennent difficiles.
+
+
 
 ---
 
+
+
+## 1. Objectifs pédagogique
+
+Le but de ce projet était d’apprendre à :  
+- Concevoir un jeu 2D complet en C#.  
+- Travailler avec des classes, des objets et des événements.  
+- Appliquer une logique de jeu (physique, collisions, interactions).  
+- Organiser un projet avec une planification (User Stories).  
+- Utiliser Git pour suivre l’évolution du projet.  
+
+---
+
+
 ## 2. Planification
 
-| User Story                | Semaine (début) | Semaine (fin) | Remarques |
-| ------------------------- | --------------- | ------------- | --------- |
-| Fonctionnalité de tir     | 5               | 9             |           |
-| Déplacement et contrôle   | 3               | 5             |           |
-| Gains de coins            | 9               | 9             |           |
-| Affichage de score        | 9               | 9             |           |
-| Affichage de la vie       | 6               | 9             |           |
-| Ennemis                   | 5               | 9             |           |
+| User Story                | Semaine (début) | Semaine (fin) |
+| ------------------------- | --------------- | ------------- |
+| Déplacement et contrôle   | 3               | 5             |
+| Fonctionnalité de tir     | 5               | 9             |
+| Ennemis                   | 5               | 9             |
+| Affichage de la vie       | 6               | 9             |
+| Gains de coins            | 9               | 9             |
+| Affichage de score        | 9               | 9             |
 
-## 3. Maquette
+---
+
+
+## 3. Maquette du jeu
 
 ![Maquette](./doc/Maquette.png)
+
+La maquette montre la zone de jeu avec le vaisseau en bas, les ennemis en haut, et les barres de vie affichées pour chaque entité.  
+Les scores et coins sont visibles en bas a droite de l’écran.
+
 
 ---
 
 ## 4. User Stories
 
-- **Déplacement et contrôle** : le joueur peut déplacer le vaisseau à gauche et à droite pour éviter les tirs et se positionner pour tirer.  
+| Fonctionnalité              | Description | Test d’acceptation |
+|----------------             |--------------|--------------------|
+| **Déplacement et contrôle** | Le joueur peut se déplacer à gauche/droite pour éviter les ennemis. | Le vaisseau se déplace sans dépasser les bords de la fenêtre. |
+| **Fonctionnalité de tir**   | Appuyer sur **Espace** tire un projectile qui fait des dégâts. | Les tirs détruisent un ennemi après plusieurs impacts. |
+| **Affichage de la vie**     | Chaque entité affiche une barre de vie. | La barre diminue lors d’un tir reçu. |
+| **Affichage du score**      | Le score augmente à chaque élimination. | +1 au score après la mort d’un ennemi. |
+| **Gains de coins**          | Les ennemis lâchent des coins. | Le compteur de coins augmente. |
+| **Ennemis**                 | Les virus descendent vers le bas et infligent des dégâts. | Le joueur perd de la vie si un ennemi atteint le bas. |
 
-- **Affichage de la vie** : chaque entité a une barre de vie verticale et un nombre précis affiché.  
+---
 
-- **Fonctionnalité de tir** : appuyer sur ESPACE pour tirer des projectiles qui font des dégâts, amélioration possible via coins.  
+## 5. Objectif du jeu
 
-- **Affichage de score** : tuer des ennemis augmente le score et la difficulté de la partie.  
+- Survire le plus longtemps possible avec le **vaisseau antivirus**.  
+- Éliminer les ennemis pour **augmenter le score** et **acheter des bonus**.
 
-- **Ennemis** : descendent verticalement et infligent des dégâts si atteignent le bas ou tirent sur le joueur.  
+---
 
-- **Gains de coins** : gagner des coins pour acheter des boosts (vie, dégâts, vitesse, etc.).
+## 6. Entités du jeu
 
-## 5. Objectif
-* Survie du **vaisseau antivirus**.  
-* Éliminer les ennemis pour maximiser le score.  
+### Vaisseau (Antivirus)
+- Tire des projectils.  
+- Peut améliorer dégats, vitesse et vie.  
+- Meurt après que la barrière ce casse.  
 
+### Ennemis (Virus)
+- Descendent verticalement.  
+- Ont une barre de vie visible.  
+- Infligent des dégâts s’ils atteignent le bas de l’écran.  
 
-## 6. Entitées
+### Obstacles (Pare-Feu)
+- Trois rectangles vert représentant la vie.  
+- Protègent temporairement le joueur.  
+- Se détruisent après 3 impacts.  
 
-### Vaisseau
-* Tire des projectiles dont les dégâts peuvent évoluer.  
-* Améliorable via des bonus (vitesse, dégâts, vie).  
-* Protection limitée : maximum 5 impacts ennemis avant la fin de la partie.  
+### Ressources
+- **Coins** : utilisé pour acheter des bonus.  
+- **Score** : reflète la progression du joueur.  
+- **Bonus** : permetent d’améliorer les stats du vaisseau.
 
-### Ennemis
-* **Virus** : descendent verticalement pour atteindre le bas de l’écran.  
-  * Barre de vie affichée.  
-  * Inflige des dégâts si atteint le bas.  
+---
 
-### Obstacles
-* **Pare-Feu** : murs de protection.  
-  * Trois rectangles verts représentant la vie.  
-  * Casse après 3 impacts.  
+## 7. Compteurs et statistiques
+- **Éliminations** : nombre d’ennemis détruits.  
+- **Munitions tirées** : total des projectiles lancés.  
+- **Score total** : reflète la performance du joueur.
 
-### Ressources et progression
-* **Coins** : monnaie pour acheter des bonus.  
-* **Score** : augmente en éliminant les ennemis.  
-* **Bonus** : améliorations des dégâts, vie, vitesse.  
+---
 
-## 6. Compteurs et statistiques
-* **Éliminations** : nombre d’ennemis détruits.  
-* **Munitions tirées** : total des projectiles lancés.  
-
-## 7. Interactions principales
-1. Déplacements du vaisseau.  
+## 8. Interactions principales
+1. Déplacement du vaisseau.  
 2. Tirs sur les ennemis.  
-3. Gestion des coins pour acheter des améliorations.  
-4. Survie et stratégie pour éviter les tirs ennemis.  
+3. Collecte de coins et achat de bonus.  
+4. Éviter ou bloquer les projectiles ennemis.
+
+---
+## 9. Diagramme de classes UML
+
+![UML](./doc/DiagammeClasses.drawio.png)
+
+## 10. Description des classes
+
+## AirSpace  
+C’est la **classe principale** du jeu.  
+Elle s’occupe de **tout gérer**, comme la boucle du jeu, les touches, l’affichage et la logique générale.
+
+**Choses qu'il fait :**  
+- Gère la fenêtre et le rendu du jeu.  
+- Gère les vagues d’ennemis et les obstacles.  
+- Suivi du score, des coins, des kills et du niveau.  
+- Achats de bonus (dégats, barrière).  
+- Passage au niveau suivant quand tout est fini.  
+
+**Méthodes principales :**  
+- `DeplacementKeyState()` --> gère les touches du joueur.  
+- `BuyDamageBonus()` / `BuyBarrierBonus()` --> achète les bonus.  
+- `NextLevel()` --> passe au niveau suivant.  
+- `Render()` et `Update()` --> affichent et mettent à jour le jeu.  
+
+---
+
+## Obstacles  
+C’est les **barrières de défense** entre le joueur et les ennemies.  
+
+**Choses qu'il fait :**  
+- Affiche les obstacles à l’écran.  
+- Gère leur vie et quand ils sont détruits après plusieurs impacts.  
+
+**Méthodes principale :**  
+- `Render(BufferedGraphics)` --> affiche l’obstacle à l’écran.  
+
+---
+
+## Antivirus  
+C’est le **vaisseau du joueur**.  
+
+**Choses qu'il fait :**  
+- Gère les mouvement (gauche / droite).  
+- Tire des projectils (création de `Munitions`).  
+- Applique les bonus (dégats, vitesse, vie).  
+
+**Méthodes principales :**  
+- `MoveLeft()` / `MoveRight()` --> déplace le joueur.  
+- `Update(int)` --> met à jour la position et l’état du joueur.  
+
+---
+
+## Virus  
+C’est les **ennemis** que le joueur doit détruire.  
+
+**Choses qu'il fait :**  
+- Descendent verticalement sur l’écran.  
+- Gèrent leur vie et leur mort.  
+- Font des dégats si ils atteignent le bas.  
+
+**Méthodes principales :**  
+- `Update(int)` --> met à jour la position du virus.  
+
+---
+
+## Munitions  
+C’est les **balles** tirées par le joueur.  
+
+**Choses qu'il fait :**  
+- Se déplacent vers le haut.  
+- Touchent les ennemis et font des dégats.  
+- Les dégats changent selon le bonus.  
+
+**Méthodes principales :**  
+- `Update(int)` --> met à jour la position de la munition.  
 
 
-## 8. Diagramme de classes UML
-
-![UML](./doc/UML_image.png)
-
-## 9. Description des classes
-
-- **AirSpace** :  
-  Classe principale qui gère l’affichage, le lancement de la partie et les interactions globales du jeu.  
-
-- **Obstacles** :  
-  Représente les murs et barrières.  
-  * Gère la vie des obstacles et leur destruction après plusieurs impacts.  
-
-- **Antivirus** :  
-  Représente le vaisseau joueur.  
-  * Gestion des déplacements, des tirs et de la vie.  
-  * Applique les bonus achetés.  
-
-- **Virus** :  
-  Représente les ennemis qui descendent verticalement.  
-  * Possède une barre de vie et inflige des dégâts au joueur.  
-
-- **Munitions** :  
-  Gère les projectiles tirés par le joueur.  
-  * Inflige des dégâts aux ennemis.  
-  * Possibilité d’évolution des dégâts selon les bonus.  
 
 
 
+## 11. Utilisation de l’IA
+
+Pendant le développement, j’ai utilisé l’IA pour :  
+- Corriger la grammaire et reformuler certaines phrases du rapport.  
+- M’aider à structurer la planification (tableau des User Stories).  
+- Vérifier la clarté de la description du diagramme UML.  
+- Trouver des idées de bonus et de mécaniques de jeu.  
+
+
+---
+
+## 12. Conclusion
+
+Le jeu est **fonctionnel et complet**.  
+Toutes les fonctionnalités de base (tir, ennemis, score, coins, bonus) sont présents et opérationnels.  
+J’ai beaucoup appris sur la gestion des collisions, les classes et la logique d’un jeu en C#.  
+Même si le rapport demandait quelques ajouts, j’ai fais un effort sur la partie technique et le rendue final.
+
+---
+
+### Projet réalisé par Okkes Erdem Köse
