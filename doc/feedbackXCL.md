@@ -64,3 +64,13 @@ Je constate d'après votre journal de travail et vos commits Git que vous avez f
   - pas de section IA
  
  vous avez jusqu'au 8 novembre pour me refaire une livraison
+
+ ## Remédiation
+
+ La relise a été faite correctement.
+ Le diagramme U ML est présent, mais il n'est pas correct du point de vue du formalisme U ML. Vous utilisez des flèches alors que cela devrait être des losanges.
+ L'image illustrative est présente. Elle me dérange quand même un peu à cause du fait que vous avez mis un titre de section pour cette image. Cela me fait penser que vous n'avez pas véritablement compris la raison pour laquelle j'ai demandé cette image.
+ Les objectifs pédagogiques sont OK.
+ La section IA OK bien que nettement trop courte
+
+ Mais je valide votre projet, malgré les petits défauts restants cités ci-dessus.
